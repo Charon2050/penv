@@ -39,29 +39,21 @@ mkdir "%LOCALAPPDATA%" >nul 2>&1
 cd %data%
 if "%~1"=="/?" (
     goto HelpStart
-) ^
-else if "%~1"=="/h" (
+) else if "%~1"=="/h" (
     goto HelpStart
-) ^
-else if "%~1"=="/help" (
+) else if "%~1"=="/help" (
     goto HelpStart
-) ^
-else if "%~1"=="-?" (
+) else if "%~1"=="-?" (
     goto HelpStart
-) ^
-else if "%~1"=="-h" (
+) else if "%~1"=="-h" (
     goto HelpStart
-) ^
-else if "%~1"=="-help" (
+) else if "%~1"=="-help" (
     goto HelpStart
-) ^
-else if "%~1"=="--?" (
+) else if "%~1"=="--?" (
     goto HelpStart
-) ^
-else if "%~1"=="--h" (
+) else if "%~1"=="--h" (
     goto HelpStart
-) ^
-else if "%~1"=="--help" (
+) else if "%~1"=="--help" (
     goto HelpStart
 ) ^
 else if "%~1"=="" (
