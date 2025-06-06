@@ -1,18 +1,87 @@
 @echo off
 :: chcp 65001
-setlocal
-
-::if not defined PortableEnvironment (
-::    set PortableEnvironment=1
-::    echo Requesting Administrator Privileges...
-::    echo 正在请求管理员权限...
-::    PowerShell -Command "Start-Process '%~dpnx0' -Verb RunAs -ArgumentList '%* '"
-::    exit /b
-::)
+setlocal enabledelayedexpansion
 
 set penvVersion=0.1
+set penvName=default
+set penvPath=%~dp0
 
-set data=%cd%\data
+shift
+
+if "%0"=="?" (
+    goto HelpStart
+) else if "%0"=="h" (
+    goto HelpStart
+) else if "%0"=="help" (
+    goto HelpStart
+) else if "%0"=="/?" (
+    goto HelpStart
+) else if "%0"=="/h" (
+    goto HelpStart
+) else if "%0"=="/help" (
+    goto HelpStart
+) else if "%0"=="-?" (
+    goto HelpStart
+) else if "%0"=="-h" (
+    goto HelpStart
+) else if "%0"=="-help" (
+    goto HelpStart
+) else if "%0"=="--?" (
+    goto HelpStart
+) else if "%0"=="--h" (
+    goto HelpStart
+) else if "%0"=="--help" (
+    goto HelpStart
+) else if "%0"=="/u" (
+    goto useStart
+) else if "%0"=="/use" (
+    goto useStart
+) else if "%0"=="-u" (
+    goto useStart
+) else if "%0"=="-use" (
+    goto useStart
+) else if "%0"=="--u" (
+    goto useStart
+) else if "%0"=="--use" (
+    goto useStart
+)
+
+goto HelpEnd
+:HelpStart
+shift
+echo.
+echo   penv-%penvVersion%
+echo.
+echo Usage:
+echo   penv               to enter penv
+echo   penv ^<commands^>    to temporarily executes a single command in the penv
+echo   penv -u ^<env name^> to use a specific portable environment
+echo   penv -h            to show this help message
+echo   exit               to exit protable environment
+echo.
+echo Examples:
+echo   penv C:/path/to/msedge.exe
+echo   open Microsoft Edge in portable mode
+echo   penv -u alice C:/path/to/firefox.exe
+echo   Open Firefox in portable environment named `alice`
+echo.
+echo.
+:HelpEnd
+
+goto useEnd
+:useStart
+if "%~1"=="" (
+    echo Usage: penv -u ^<env name^>
+    exit
+) ^
+else (
+    set penvName=%~1
+    shift
+    shift
+)
+:useEnd
+
+set data=%penvPath%\env\%penvName%
 set PUBLIC=%data%\Public
 set ALLUSERSPROFILE=%data%\ProgramData
 set ProgramData=%data%\ProgramData
@@ -37,51 +106,22 @@ mkdir "%APPDATA%" >nul 2>&1
 mkdir "%LOCALAPPDATA%" >nul 2>&1
 
 cd %data%
-prompt [penv] $P$G
-if "%~1"=="/?" (
-    goto HelpStart
-) else if "%~1"=="/h" (
-    goto HelpStart
-) else if "%~1"=="/help" (
-    goto HelpStart
-) else if "%~1"=="-?" (
-    goto HelpStart
-) else if "%~1"=="-h" (
-    goto HelpStart
-) else if "%~1"=="-help" (
-    goto HelpStart
-) else if "%~1"=="--?" (
-    goto HelpStart
-) else if "%~1"=="--h" (
-    goto HelpStart
-) else if "%~1"=="--help" (
-    goto HelpStart
-) ^
-else if "%~1"=="" (
-    cmd /k %*
+prompt [%penvName%] $P$G
+
+set commands=
+:commandsLoopStart
+if "%0"=="" goto commandsLoopEnd
+set commands=!commands! %0
+shift
+goto commandsLoopStart
+:commandsLoopEnd
+
+if "%commands%"=="" (
+    cmd /k
 ) ^
 else (
-    cmd /c %*
+    cmd /c "%commands%"
 )
-
-goto HelpEnd
-:HelpStart
-echo.
-echo   penv-%penvVersion%
-echo.
-echo Usage:
-echo   penv              to enter penv
-echo   penv ^<commands^>   to temporarily executes a single command in the penv
-echo   penv -help        to show this help message
-echo   exit              to exit protable environment
-echo.
-echo Examples:
-echo   penv C:/path/to/msedge.exe
-echo   open Microsoft Edge in portable mode
-echo.
-echo.
-:HelpEnd
 
 :end
 prompt $P$G
-exit

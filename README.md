@@ -10,14 +10,16 @@ run `install-penv.bat`, it will add `penv` to environment variables.
 
 - `penv` to enter portable environment.
 - `penv <commands>` to temporarily executes a single command in the penv.
-- `penv -help` to show help message.
+- `penv -u | -use <env name>` to use a specific portable environment.
+- `penv -h | -help` to show help message.
 - `exit` to exit portable environment.
 
 ### Examples:
 
 `penv C:/path/to/msedge.exe`
-open Microsoft Edge in portable mode.
+Open Microsoft Edge in portable mode.
 
-
+`penv -u alice C:/path/to/firefox.exe`
+Open Firefox in portable environment named `alice`
 
 
