@@ -1,2 +1,22 @@
 # penv
-Create a standalone environment with PortableEnvironment.bat in Windows.
+
+Run any programs in protable mode in Windows.
+
+## Install (Optional)
+
+run `install-penv.bat`, it will add `penv` to environment variables.
+
+## Usage
+
+`penv` to enter portable environment.
+`penv <commands>` to temporarily executes a single command in the penv.
+`penv -help` to show help message.
+
+### Examples:
+
+`penv C:/path/to/msedge.exe`
+open Microsoft Edge in portable mode.
+
+
+
+
