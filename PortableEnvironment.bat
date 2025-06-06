@@ -10,6 +10,8 @@ setlocal
 ::    exit /b
 ::)
 
+set penvVersion=0.1
+
 set data=%cd%\data
 set PUBLIC=%data%\Public
 set ALLUSERSPROFILE=%data%\ProgramData
@@ -34,8 +36,54 @@ mkdir "%CommonProgramFiles(x86)%" >nul 2>&1
 mkdir "%APPDATA%" >nul 2>&1
 mkdir "%LOCALAPPDATA%" >nul 2>&1
 
-if "%~1"=="" (
+cd %data%
+if "%~1"=="/?" (
+    goto HelpStart
+) ^
+else if "%~1"=="/h" (
+    goto HelpStart
+) ^
+else if "%~1"=="/help" (
+    goto HelpStart
+) ^
+else if "%~1"=="-?" (
+    goto HelpStart
+) ^
+else if "%~1"=="-h" (
+    goto HelpStart
+) ^
+else if "%~1"=="-help" (
+    goto HelpStart
+) ^
+else if "%~1"=="--?" (
+    goto HelpStart
+) ^
+else if "%~1"=="--h" (
+    goto HelpStart
+) ^
+else if "%~1"=="--help" (
+    goto HelpStart
+) ^
+else if "%~1"=="" (
     cmd /k %*
-) else (
+) ^
+else (
     %*
 )
+
+goto HelpEnd
+:HelpStart
+echo.
+echo   penv-%penvVersion%
+echo.
+echo Usage:
+echo   penv              to enter penv
+echo   penv ^<commands^>   to temporarily executes a single command in the penv
+echo   penv -help        to show this help message
+echo.
+echo Examples:
+echo   penv C:/path/to/msedge.exe
+echo   open Microsoft Edge in portable mode
+echo.
+echo.
+:HelpEnd
