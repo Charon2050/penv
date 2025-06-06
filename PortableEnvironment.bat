@@ -37,6 +37,7 @@ mkdir "%APPDATA%" >nul 2>&1
 mkdir "%LOCALAPPDATA%" >nul 2>&1
 
 cd %data%
+prompt [penv] $P$G
 if "%~1"=="/?" (
     goto HelpStart
 ) else if "%~1"=="/h" (
@@ -60,7 +61,7 @@ else if "%~1"=="" (
     cmd /k %*
 ) ^
 else (
-    %*
+    cmd /c %*
 )
 
 goto HelpEnd
@@ -72,6 +73,7 @@ echo Usage:
 echo   penv              to enter penv
 echo   penv ^<commands^>   to temporarily executes a single command in the penv
 echo   penv -help        to show this help message
+echo   exit              to exit protable environment
 echo.
 echo Examples:
 echo   penv C:/path/to/msedge.exe
@@ -79,3 +81,7 @@ echo   open Microsoft Edge in portable mode
 echo.
 echo.
 :HelpEnd
+
+:end
+prompt $P$G
+exit
