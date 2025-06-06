@@ -1,6 +1,6 @@
 # penv
 
-Run any programs in protable mode in Windows.
+Run any programs in portable mode in Windows.
 
 ## Install (Optional)
 
