@@ -66,6 +66,7 @@ echo   penv -u alice C:/path/to/firefox.exe
 echo   Open Firefox in portable environment named `alice`
 echo.
 echo.
+goto end
 :HelpEnd
 
 goto useEnd
