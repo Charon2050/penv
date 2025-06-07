@@ -92,10 +92,11 @@ set ProgramW6432=%data%\Program Files
 set CommonProgramW6432=%ProgramFiles%\Common Files
 set ProgramFiles(x86)=%data%\Program Files (x86)
 set CommonProgramFiles(x86)=%ProgramFiles(x86)%\Common Files
-set HOMEPATH=%data%
 set USERPROFILE=%data%
 set APPDATA=%USERPROFILE%\AppData\Roaming
 set LOCALAPPDATA=%USERPROFILE%\AppData\Local
+for %%A in ("%data%") do set "HOMEDRIVE=%%~dA"
+for %%A in ("%data%") do set "HOMEPATH=%%~pA"
 
 mkdir "%PUBLIC%" >nul 2>&1
 mkdir "%ProgramData%" >nul 2>&1
