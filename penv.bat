@@ -57,13 +57,13 @@ echo   penv               to enter penv
 echo   penv ^<commands^>    to temporarily executes a single command in the penv
 echo   penv -u ^<env name^> to use a specific portable environment
 echo   penv -h            to show this help message
-echo   exit               to exit protable environment
+echo   exit               to exit portable environment
 echo.
 echo Examples:
 echo   penv C:/path/to/msedge.exe
-echo   open Microsoft Edge in portable mode
+echo     Open Microsoft Edge in portable mode
 echo   penv -u alice C:/path/to/firefox.exe
-echo   Open Firefox in portable environment named `alice`
+echo     Open Firefox in portable environment named `alice`
 echo.
 echo.
 goto end
