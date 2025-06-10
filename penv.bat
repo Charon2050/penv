@@ -2,7 +2,7 @@
 :: chcp 65001
 setlocal enabledelayedexpansion
 
-set penvVersion=0.1
+set penvVersion=0.2
 set penvName=default
 set penvPath=%~dp0
 
@@ -65,6 +65,8 @@ echo     Open Microsoft Edge in portable mode
 echo   penv -u alice C:/path/to/firefox.exe
 echo     Open Firefox in portable environment named `alice`
 echo.
+echo More information at github.com/Charon2050/penv
+echo.
 echo.
 goto end
 :HelpEnd
@@ -106,6 +108,36 @@ mkdir "%ProgramFiles(x86)%" >nul 2>&1
 mkdir "%CommonProgramFiles(x86)%" >nul 2>&1
 mkdir "%APPDATA%" >nul 2>&1
 mkdir "%LOCALAPPDATA%" >nul 2>&1
+
+:: read path.txt
+cd. >> %penvPath%/path.txt
+set "customPath="
+for /f "usebackq delims=" %%a in ("%penvPath%/path.txt") do (
+    set "line=%%a"
+    set "line=!line:%%cd%%=%penvPath%!"
+    set "line=!line:/=\!"
+    if defined customPath (
+        set "customPath=!customPath!;!line!"
+    ) else (
+        set "customPath=!line!"
+    )
+)
+set "PATH=!customPath!;%PATH%"
+
+:: read path.txt in penv/env/<env name>
+set "customPath="
+cd. >> %data%/path.txt
+for /f "usebackq delims=" %%a in ("%data%/path.txt") do (
+    set "line=%%a"
+    set "line=!line:%%cd%%=%penvPath%!"
+    set "line=!line:/=\!"
+    if defined customPath (
+        set "customPath=!customPath!;!line!"
+    ) else (
+        set "customPath=!line!"
+    )
+)
+set "PATH=!customPath!;%PATH%"
 
 cd %data%
 prompt [%penvName%] $P$G

@@ -26,3 +26,33 @@
 `penv -u alice C:/path/to/firefox.exe`
 <br/>在名为 `alice` 的便携环境中打开 Firefox 浏览器。
 
+## 环境变量 PATH
+
+可在 `penv/path.txt` (全局) or `penv/env/<env name>/path.txt` (单个环境) 配置环境变量。
+
+用 `%cd%` 表示相对路径，`%cd%` 将直接替换为 `penv.bat` 的所在路径。例如，`penv.bat` 位于 `D:/penv/penv.bat`，则 `%cd%/Python` 将等价于 `D:/penv/Python`。
+
+### 示例
+
+例如，在这样的目录结构中：
+
+```
+penv/
+├ env/
+├ Python/
+│ ├ Python.exe
+│ └ ...
+├ JAVA/
+│ ├ bin/
+│ │ ├ java.exe
+│ └ ...
+├ penv.bat
+└ path.txt
+```
+
+可这样配置 `path.txt`：
+
+```
+%cd%/python
+%cd%/JAVA/bin
+```
