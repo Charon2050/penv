@@ -1,5 +1,7 @@
 # penv
 
+**English** | [简体中文](https://github.com/Charon2050/penv/blob/main/README_zh-CN.md)
+
 Run any programs in portable mode in Windows.
 
 ## Install (Optional)
@@ -17,9 +19,9 @@ run `install-penv.bat`, it will add `penv` to environment variables.
 ### Examples:
 
 `penv C:/path/to/msedge.exe`
-Open Microsoft Edge in portable mode.
+<br/>Open Microsoft Edge in portable mode.
 
 `penv -u alice C:/path/to/firefox.exe`
-Open Firefox in portable environment named `alice`
+<br/>Open Firefox in portable environment named `alice`
 
 
